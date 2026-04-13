@@ -1,0 +1,63 @@
+🚀 Starting CycleGAN Model Training and Evaluation (Rtest)...
+==Trial: RR_CGAN_SAVE_Rtest Processing day0: 20230621, day 1 out of 2, testing on 2 future days==
+Training CycleGAN..., it is optimized:False
+Saving cycleGAN instance...
+cycleGAN instance saved.
+Model trained, metrics:
+Epoch 0/0
+     correlation  : train = [0.5720329018376593, 0.6629368366475966, 0.5222127496730846, 0.49694402750522265]
+                      val = [0.533714419861965, 0.6950361499059927, 0.4193764348991063, 0.40751830381126897]
+
+  0%|          | 0/2 [00:00<?, ?it/s]  0%|          | 0/2 [00:24<?, ?it/s, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230621, Test Day IDX=0, Total Test Day=2] 50%|█████     | 1/2 [00:24<00:24, 24.92s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230621, Test Day IDX=0, Total Test Day=2] 50%|█████     | 1/2 [00:50<00:24, 24.92s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=1, Total Test Day=2]100%|██████████| 2/2 [00:50<00:00, 25.30s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=1, Total Test Day=2]100%|██████████| 2/2 [00:50<00:00, 25.24s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=1, Total Test Day=2]
+Loading and processing data...
+Data loaded, Smoothing data...
+Data loaded, smoothed, and splited.
+Training cycleGAN aligner...
+Using device: cuda
+Preprocessing validation data...
+On the 10th epoch, the R² on the validation set is 0.01
+Preprocessing validation data...
+On the 20th epoch, the R² on the validation set is 0.05
+Preprocessing validation data...
+On the 30th epoch, the R² on the validation set is 0.00
+The aligner has been well trained on the 10th epoch
+Saved: results/cgan_rtest/checkpoints/checkpoint_20230621_20230621_nonoptimized.pt (113.2 KB) + results/cgan_rtest/checkpoints/transformed_20230621_20230621_nonoptimized.npz (4063.8 KB)
+Loading and processing data...
+Data loaded, Smoothing data...
+Data loaded, smoothed, and splited.
+Training cycleGAN aligner...
+Using device: cuda
+Preprocessing validation data...
+On the 10th epoch, the R² on the validation set is -0.04
+Preprocessing validation data...
+On the 20th epoch, the R² on the validation set is -0.26
+Preprocessing validation data...
+On the 30th epoch, the R² on the validation set is -0.06
+The aligner has been well trained on the 0th epoch
+Saved: results/cgan_rtest/checkpoints/checkpoint_20230621_20230622_nonoptimized.pt (113.2 KB) + results/cgan_rtest/checkpoints/transformed_20230621_20230622_nonoptimized.npz (5260.7 KB)
+Saved results for day 20230621 at day 0/2
+==Trial: RR_CGAN_SAVE_Rtest Processing day0: 20230622, day 2 out of 2, testing on 1 future days==
+Training CycleGAN..., it is optimized:False
+Saving cycleGAN instance...
+cycleGAN instance saved.
+Model trained, metrics:
+Epoch 0/0
+     correlation  : train = [0.6533566571402633, 0.6037933113034786, 0.5552263155906842, 0.4424365668887001]
+                      val = [0.6530813194683897, 0.5090359723394285, 0.4354596467267391, 0.30719737072830394]
+
+  0%|          | 0/1 [00:00<?, ?it/s]  0%|          | 0/1 [00:25<?, ?it/s, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=0, Total Test Day=1]100%|██████████| 1/1 [00:25<00:00, 25.81s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=0, Total Test Day=1]100%|██████████| 1/1 [00:25<00:00, 25.81s/it, Trial=RR_CGAN_SAVE_Rtest, Test Day=20230622, Test Day IDX=0, Total Test Day=1]
+Loading and processing data...
+Data loaded, Smoothing data...
+Data loaded, smoothed, and splited.
+Training cycleGAN aligner...
+Using device: cuda
+Preprocessing validation data...
+On the 10th epoch, the R² on the validation set is -0.04
+Preprocessing validation data...
+On the 20th epoch, the R² on the validation set is -0.06
+Preprocessing validation data...
+On the 30th epoch, the R² on the validation set is -0.29
+The aligner has been well trained on the 0th epoch
+Saved: results/cgan_rtest/checkpoints/checkpoint_20230622_20230622_nonoptimized.pt (113.2 KB) + results/cgan_rtest/checkpoints/transformed_20230622_20230622_nonoptimized.npz (6188.8 KB)
+Final Saved results for day 20230622 at day 1/2
+✅ Training and Evaluation completed!

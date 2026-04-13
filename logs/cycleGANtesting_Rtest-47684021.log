@@ -1,0 +1,13 @@
+🚀 Starting CycleGAN Model Training and Evaluation (Rtest)...
+==Trial: RR_CGAN_SAVE_Rtest Processing day0: 20230621, day 1 out of 2, testing on 2 future days==
+Traceback (most recent call last):
+  File "/home/eddyliu/alignment/CycleGAN_runs/cgan_longterm_stab_compare.py", line 178, in <module>
+    main()
+  File "/home/eddyliu/alignment/CycleGAN_runs/cgan_longterm_stab_compare.py", line 101, in main
+    preprocessor_trainer = Preprocessing(conf('preprocessing')['preprocessing_trainer'])
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/eddyliu/alignment/neuraldecoding/neuraldecoding/preprocessing/preprocessing.py", line 25, in __init__
+    preprocessing_instance = preprocessing_class(**step_params)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: CycleGanBlock.__init__() got an unexpected keyword argument 'is_optimized'
+✅ Training and Evaluation completed!
