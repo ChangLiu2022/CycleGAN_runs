@@ -17,7 +17,7 @@
           training_params:
             loss_type: 'L1'
             optim_type: 'Adam'
-            epochs: 30
+            epochs: 400
             batch_size: 256
             D_lr: 0.01
             G_lr: 0.001
