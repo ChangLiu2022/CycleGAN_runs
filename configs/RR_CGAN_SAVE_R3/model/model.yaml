@@ -1,0 +1,5 @@
+﻿type: "RidgeRegression" # Names defined in model module
+params:
+  alpha: 0.001
+  fit_intercept: False # arbitrary parameters feeding into the model
+fpath: "results/models/rr/rr_cgan_r3.pkl" # directory to saved model

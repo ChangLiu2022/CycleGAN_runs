@@ -1,0 +1,71 @@
+﻿preprocessing_trainer:
+  # order: [dict1, stabilization1, split1, add_history1, add_history2, tuple_out]
+  order: [cgan, nwb1, dict1, split1, add_history1, add_history2, normalize_standard, out]
+  # order: [dict1, stabilization1, split1, tuple_out]
+  content:
+    cgan:
+      type: CycleGanBlock
+      params:
+        fpath: "results/cgan_r3/cgan_r3.pkl"
+        cycleGAN_params: {}
+        neural_type: 'tcfr'
+        verbose: True
+        is_optimized: False
+        checkpoint_save_dir: "results/cgan_r3/checkpoints/"
+    nwb1:
+      type: LoadNWBBlock
+      params: {}
+    dict1:
+      type: Dict2DataDictBlock
+      params:
+        neural_type: tcfr
+    smooth:
+      type: SmoothBlock
+      params: {}
+    split1:
+      type: DataSplitBlock
+      params:
+        split_ratio: 0.8
+        split_seed: -1
+    add_history1:
+      type: AddHistoryBlockRR
+      params:
+        location: ['neural_train', 'behaviour_train']
+        seq_length: 8
+    add_history2:
+      type: AddHistoryBlockRR
+      params:
+        location: ['neural_test', 'behaviour_test']
+        seq_length: 8
+    # normalize_sequence:
+    #   type: NormalizationBlock
+    #   params:
+    #     location: ['neural_train', 'neural_test']
+    #     method: sklearn
+    #     normalizer_params:
+    #       type: StandardScaler
+    #       is_IO: False
+    #       is_save: False
+    #       params: {}
+    normalize_standard:
+      type: NormalizationBlock
+      params:
+        location: ['behaviour_train', 'behaviour_test']
+        method: sklearn
+        normalizer_params:
+          type: StandardScaler
+          is_IO: True
+          is_save: True
+          save_path: "results/normalizers/cgan_norm_r3.pkl"
+          params: {}
+    # add_noise:
+    #   type: AddNoiseBlock
+    #   params:
+    #     location: ['neural_train']
+    #     noise_params:
+    #       bias_neural_std: 0.2
+    #       noise_neural_std: 0.1
+    #       device: cuda
+    out:
+      type: Dict2TrainerBlock
+      params: {}

@@ -1,0 +1,11 @@
+defaults:
+  - /model@model: model
+
+training: {}
+
+evaluation:
+  metrics: ["correlation"]
+  params: {}
+
+data:
+  data_path: "/home/chesteklab/Code/Chang/LINK_dataset/001201/sub-Monkey-N/sub-Monkey-N_ses-20210628_ecephys.nwb"

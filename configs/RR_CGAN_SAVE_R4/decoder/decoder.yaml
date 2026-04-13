@@ -1,0 +1,4 @@
+﻿defaults:
+  - /model: model
+
+fpath: "results/models/rr/rr_cgan_r4.pkl" # directory to saved model
