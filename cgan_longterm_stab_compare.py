@@ -1,3 +1,14 @@
+import psutil
+import gc
+import torch
+import os
+def log_memory(label=""):
+    process = psutil.Process(os.getpid())
+    rss = process.memory_info().rss / 1024 / 1024 / 1024
+    gpu_alloc = torch.cuda.memory_allocated() / 1024 / 1024 / 1024 if torch.cuda.is_available() else 0
+    gpu_reserved = torch.cuda.memory_reserved() / 1024 / 1024 / 1024 if torch.cuda.is_available() else 0
+    print(f"[MEM {label}] CPU: {rss:.2f}GB | GPU alloc: {gpu_alloc:.2f}GB | GPU reserved: {gpu_reserved:.2f}GB")
+
 def main():
     import argparse
     import sys
@@ -6,13 +17,13 @@ def main():
     neural_decoding_dir = "/home/eddyliu/alignment/neuraldecoding"
     # data_dir = "D:/ND/github/LINK_dataset/data/001201/sub-Monkey-N"
     # neural_decoding_dir = "D:/ND/github/neuraldecoding"
-    testname = "TENPERCENT"
+    testname = "TENPERCENT-MEMFIX"
     N_save_every_day = 3
     sys.path.append(neural_decoding_dir)
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_dir", type=str, default="configs", help="Path to the config directory.")
-    parser.add_argument("--config", type=str, default="RR_CGAN", help="config file name.")
+    parser.add_argument("--config", type=str, default="RR_CGAN_SAVE", help="config file name.")
     parser.add_argument("--day0s", type=str, default=None, help="Comma-separated day0 dates to run, e.g. '20200127,20200930'. If None, runs all days.")
     args = parser.parse_args()
     cfg_path = os.path.join(args.config_dir, args.config)
@@ -115,13 +126,17 @@ def main():
         total_test_days = len(test_days)
         pbar = tqdm(enumerate(test_days), total=total_test_days)
         for j, day in pbar:
+            log_memory(f"start {sel_day}_{day}")
+
             preprocessor_decoder = Preprocessing(conf('preprocessing')['preprocessing_decoder'])
             decoder = LinearDecoder(decoder_config)
             decoder.load_model()
             data = {'data_path':os.path.join(data_dir, f"sub-Monkey-N_ses-{day}_ecephys.nwb")}
 
-            a = time.time()
             _, neural_test, _, finger_test = preprocessor_decoder.preprocess_pipeline(data, params = {'is_train': False, 'decoder': decoder})
+            
+            log_memory(f"after pipeline {sel_day}_{day}")
+            
             rr_prediction = decoder.predict(neural_test)
 
             normalizer_path = conf('preprocessing')['preprocessing_trainer']['content']['normalize_standard']['params']['normalizer_params']['save_path']
@@ -164,6 +179,11 @@ def main():
                     results_df = pd.DataFrame(columns=['train_day', 'test_day', 'r', 'r2', 'mse'])
             # Append the row to the results dataframe
             results_df = pd.concat([results_df, df_row], ignore_index=True)
+
+            # del preprocessor_decoder, decoder, data, neural_test, finger_test, rr_prediction
+            # torch.cuda.empty_cache()
+            # gc.collect()
+            log_memory(f"after cleanup {sel_day}_{day}")
             
         if i % N_save_every_day == 0:
             csv_path = os.path.join(result_save_path, f"results_{trialname}_{testname}_{i}.csv")
