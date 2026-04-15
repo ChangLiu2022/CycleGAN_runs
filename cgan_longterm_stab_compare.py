@@ -180,9 +180,9 @@ def main():
             # Append the row to the results dataframe
             results_df = pd.concat([results_df, df_row], ignore_index=True)
 
-            # del preprocessor_decoder, decoder, data, neural_test, finger_test, rr_prediction
-            # torch.cuda.empty_cache()
-            # gc.collect()
+            del preprocessor_decoder, decoder, data, neural_test, finger_test, rr_prediction
+            torch.cuda.empty_cache()
+            gc.collect()
             log_memory(f"after cleanup {sel_day}_{day}")
             
         if i % N_save_every_day == 0:
