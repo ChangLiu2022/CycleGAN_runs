@@ -1,0 +1,36 @@
+defaults:
+  - /model@model: model
+
+optimizer:
+  type: AdamW
+  params:
+    lr: 0.0002
+    weight_decay: 0.001
+
+scheduler:
+  type: LinearLR
+  params:
+    start_factor: 1.0
+    end_factor: 0.05
+    total_iters: 2000
+
+loss_func:
+  type: MSELoss
+  params: {}
+
+training:
+  num_epochs: 2000
+  batch_size: [64, 1]
+  device: cuda # cuda , if avail 
+  print_results: True
+  print_every: 5
+  clear_cache: False
+  patience: 200
+
+evaluation:
+  metrics: ["loss"]
+  save_path: "results/lstm/test_trainer_results_em.csv"
+  params: {}
+
+data:
+  data_path: "/home/chesteklab/Code/Chang/LINK_dataset/001201/sub-Monkey-N/sub-Monkey-N_ses-20210628_ecephys.nwb"
