@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to call the run-file for cycleGAN training
+# Script to call the run-file for cycleGAN training # saving
 
 echo "🚀 Starting CycleGAN Model Training and Evaluation..."
 
