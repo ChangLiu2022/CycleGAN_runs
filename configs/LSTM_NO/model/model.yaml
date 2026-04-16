@@ -1,6 +1,6 @@
 type: LSTM  
 params:
-  input_size: 40
+  input_size: 96
   num_outputs: 4
   hidden_size: 300
   num_layers: 1
