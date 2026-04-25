@@ -10,4 +10,4 @@ params:
   dropout_input: False
   drop_prob: 0.0
   sequence_length: 20
-fpath: "results/models/lstm/lstm_cca.pkl" # directory to saved model
+fpath: "results/models/lstm/lstm_cca_0.pkl" # directory to saved model

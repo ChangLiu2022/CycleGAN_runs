@@ -43,7 +43,7 @@ preprocessing_trainer:
           type: StandardScaler
           is_IO: True
           is_save: True
-          save_path: "results/normalizers/finger_standard_scaler_lstm_cca.pkl"
+          save_path: "results/normalizers/finger_standard_scaler_lstm_cca_1.pkl"
           params: {}
     # add_noise:
     #   type: AddNoiseBlock
@@ -73,6 +73,6 @@ preprocessing_trainer:
             alignment_method: 
               type: CCA
               params: {}
-            fpath: "results/alignment_models/LSTM_CCA.pkl"
+            fpath: "results/alignment_models/LSTM_CCA_1.pkl"
             ndims: 40
     

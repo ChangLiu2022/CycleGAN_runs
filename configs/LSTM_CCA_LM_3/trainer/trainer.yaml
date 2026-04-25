@@ -29,7 +29,7 @@ training:
 
 evaluation:
   metrics: ["loss"]
-  save_path: "results/lstm/test_trainer_results.csv"
+  save_path: "results/lstm/test_trainer_results_3.csv"
   params: {}
 
 data:

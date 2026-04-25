@@ -1,8 +1,7 @@
-preprocessing_decoder: 
+preprocessing_trainer:
   # order: [dict1, stabilization1, split1, add_history1, add_history2, tuple_out]
-  order: [nwb1, dict1, smooth, stabilization1, split1, add_history1, normalize_sequence, tuple_out]
-  #order: [nwb1, dict1, stabilization1, split1, tuple_out]
-
+  order: [nwb1, dict1, smooth, stabilization1, split1, add_history1, normalize_sequence, normalize_standard, out]
+  #order: [nwb1, dict1, stabilization1, split1, normalize_standard, out]
   # order: [dict1, stabilization1, split1, tuple_out]
   content:
     nwb1:
@@ -35,8 +34,27 @@ preprocessing_decoder:
           is_IO: False
           is_save: False
           params: {}
-    tuple_out:
-      type: Dict2TupleBlock
+    normalize_standard:
+      type: NormalizationBlock
+      params:
+        location: ['behaviour_train', 'behaviour_test']
+        method: sklearn
+        normalizer_params:
+          type: StandardScaler
+          is_IO: True
+          is_save: True
+          save_path: "results/normalizers/finger_standard_scaler_lstm_cca_3.pkl"
+          params: {}
+    # add_noise:
+    #   type: AddNoiseBlock
+    #   params:
+    #     location: ['neural_train']
+    #     noise_params:
+    #       bias_neural_std: 0.2
+    #       noise_neural_std: 0.1
+    #       device: cuda
+    out:
+      type: Dict2TrainerBlock
       params: {}
     stabilization1:
       type: StabilizationBlock
@@ -55,6 +73,6 @@ preprocessing_decoder:
             alignment_method: 
               type: CCA
               params: {}
-            fpath: "results/alignment_models/LSTM_CCA.pkl"
+            fpath: "results/alignment_models/LSTM_CCA_3.pkl"
             ndims: 40
     
