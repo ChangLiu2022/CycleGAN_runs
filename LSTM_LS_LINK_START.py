@@ -17,7 +17,7 @@ parser.add_argument("--starting_date_idx", type=int, default=0, help="Starting d
 parser.add_argument("--end_date_idx", type=int, default=None, help="End date index (exclusive). If not provided, processes to the end.")
 args = parser.parse_args()
 
-cfg_path = os.path.join(args.config_dir, args.config + "_" + str(args.starting_date_idx))
+cfg_path = os.path.join(args.config_dir, args.config)
 trialname = os.path.basename(args.config).split('/')[0]
 certain_trial_name = args.config + "_" + str(args.starting_date_idx)
 result_save_path = os.path.join("results", trialname+ '_' + testname)
