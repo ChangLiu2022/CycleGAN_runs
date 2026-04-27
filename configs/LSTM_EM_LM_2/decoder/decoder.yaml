@@ -1,0 +1,4 @@
+defaults:
+  - /model: model
+
+fpath: "results/models/lstm/lstm_em_2.pkl" # directory to saved model

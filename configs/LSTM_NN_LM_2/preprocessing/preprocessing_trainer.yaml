@@ -1,0 +1,81 @@
+preprocessing_trainer:
+  # order: [dict1, stabilization1, split1, add_history1, add_history2, tuple_out]
+  order: [nwb1, dict1, smooth, stabilization1, split1, add_history1, normalize_sequence, normalize_standard, out]
+  #order: [nwb1, dict1, stabilization1, split1, normalize_standard, out]
+  # order: [dict1, stabilization1, split1, tuple_out]
+  content:
+    nwb1:
+      type: LoadNWBBlock
+      params: {}
+    dict1:
+      type: Dict2DataDictBlock
+      params:
+        neural_type: tcfr
+    smooth:
+      type: SmoothBlock
+      params: {}
+    split1:
+      type: DataSplitBlock
+      params:
+        split_ratio: 0.8
+        split_seed: -1
+    add_history1:
+      type: AddHistoryBlock
+      params:
+        location: ['neural_train', 'neural_test']
+        seq_length: 20
+    normalize_sequence:
+      type: NormalizationBlock
+      params:
+        location: ['neural_train', 'neural_test']
+        method: sequence_scaler
+        normalizer_params:
+          type: sequence_scaler
+          is_IO: False
+          is_save: False
+          params: {}
+    normalize_standard:
+      type: NormalizationBlock
+      params:
+        location: ['behaviour_train', 'behaviour_test']
+        method: sklearn
+        normalizer_params:
+          type: StandardScaler
+          is_IO: True
+          is_save: True
+          save_path: "results/normalizers/finger_standard_scaler_lstm_nn_2.pkl"
+          params: {}
+    # add_noise:
+    #   type: AddNoiseBlock
+    #   params:
+    #     location: ['neural_train']
+    #     noise_params:
+    #       bias_neural_std: 0.2
+    #       noise_neural_std: 0.1
+    #       device: cuda
+    out:
+      type: Dict2TrainerBlock
+      params: {}
+    stabilization1:
+      type: StabilizationBlock
+      params:
+        location: 'neural'
+        stabilization_config:
+          type: LatentSpaceAlignment
+          params:
+            # dim_red_method: 
+            #   type: EMFactorAnalysis1
+            #   params:
+            #     verbose: True
+            dim_red_method: 
+              type: PCA
+              params: {}
+            alignment_method: 
+              type: NeuralNetworkAlignment
+              params:
+                hidden_sizes: [64, 64]  
+                lr: 0.001
+                epochs: 500
+            fpath: "results/alignment_models/LSTM_NN_2.pkl"
+            ndims: 40
+    
